@@ -1,0 +1,41 @@
+{
+  "name": "botwebsite",
+  "private": true,
+  "scripts": {
+    "dev": "next -p 8080",
+    "build": "next build",
+    "start": "node_modules/next/dist/bin/next start -p 8080",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/data-grid": "^4.0.0-alpha.37",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.6.2",
+    "@mui/styles": "^5.6.2",
+    "@popperjs/core": "^2.11.5",
+    "@reduxjs/toolkit": "^1.8.2",
+    "@sls-next/serverless-component": "^3.7.0",
+    "classnames": "^2.3.1",
+    "css-element-queries": "^1.2.3",
+    "express": "^4.18.1",
+    "json-bigint": "^1.0.0",
+    "latest": "^0.2.0",
+    "material-ui": "^0.15.0",
+    "moment": "^2.29.3",
+    "n": "^8.2.0",
+    "next": "^12.2.0",
+    "next-auth": "^4.2.1",
+    "pg": "^8.7.3",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "eslint": "8.8.0",
+    "eslint-config-next": "12.0.10"
+  }
+}

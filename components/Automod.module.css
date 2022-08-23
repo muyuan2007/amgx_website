@@ -1,0 +1,345 @@
+.full {
+    width: 100vw
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 64px 0px 48px;
+}
+
+.menuGrid {
+    position: relative;
+}
+
+.tabGrid {
+    width: calc(100% - 20px);
+    position: relative;
+    left: 10px;
+}
+
+.icon {
+    color: white;
+    width: 21px;
+}
+
+.menuIcon {
+    font-size: 30px;
+    color:white;
+}
+
+.normallyInvis {
+    display: none;
+    background: transparent
+}
+
+.menuThingy {
+    width: 30px;
+    background: transparent;
+    color: white;
+}
+
+.menuButtonText {
+    margin-left: 5px;
+    text-transform: initial;
+    color:white;
+    font-size: 15px;
+}
+
+.cardGrid {
+    padding: 20px 0;
+    width: calc(100% - 50px);
+}
+
+.card{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardContent {
+    flex-grow: 1;
+    left: 15px;
+    position: relative;
+    width: calc(100% - 30px);
+
+}
+
+.cardTitle {
+    position: relative;
+    font-size: 30px;
+    left: 10px;
+    font-family: verdana;
+    top: 0px;
+    width: calc(100% - 80px);
+}
+
+.channelSelectHeader{
+    position: relative;
+    font-size: 20px;
+    top: 5px;
+}
+
+.selectGrid{
+    position: relative;
+    left: 10px;
+}
+
+.select{
+    width: calc(100% - 20px);
+    position: relative;
+    top: 10px;
+}
+
+.cardFooter{
+    padding: 40px 0;
+}
+
+.buttonGrid{
+    position: relative;
+    top: 25px;
+    width: calc(100% - 20px);
+}
+
+.NMLFooter{
+    padding: 20px 0;
+}
+
+.button{
+    background-color: lightgray;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonText {
+    text-transform: initial;
+    font-size: 18px;
+}
+
+.settingTF {
+    position: relative;
+    width: calc(100% - 40px);
+    resize: none;
+    display: flex;
+    height: 30px;
+    font-size: 20px;
+    outline: none;
+    border: 1px solid lightgray;
+    font-family: arial;
+}
+
+.webLogTab {
+    background-color: lightgray;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.atbtn{
+    background-color: #00c45c;
+    color: white;
+
+}
+
+.atbtn:hover {
+    background-color: #00db66;
+}
+
+.webLogTop{
+    position: relative;
+    left: 10px;
+}
+
+.settingBPair{
+    width: calc(100% - 20px);
+    position: relative;
+    left: 10px;
+}
+
+.dataTable{
+    width: 100%;
+}
+
+.sideButton{
+    width: 40px;
+    height: 30px;
+    background-color: cornflowerblue;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+.footer{
+    background-color: #ffffff;
+    padding: 60px 0;
+}
+
+.expression{
+    color: red;
+    font-family: monospace;
+    font-size: 13;
+    display: inline;
+}
+
+.description{
+    font-size: 13;
+    display: inline;
+}
+
+.titleGrid{
+    position: relative;
+}
+
+.welcomeCardTitle{
+    font-family: verdana;
+    font-size: 30px;
+    width: calc(100% - 80px);
+}
+
+.divider1{
+    opacity: 0.4;
+    position: relative;
+    top: 0px;
+    width: 100%;
+}
+
+.divider2{
+    opacity: 0.4;
+    position: relative;
+    top: 40px;
+    width: 100%;
+}
+
+.divider3{
+    opacity: 0.4;
+    position: relative;
+    top: 60px;
+    width: 100%;
+}
+
+.footerInBetween {
+    padding: 10px 0;
+}
+
+.optionSub{
+    font-size: 16px;
+    width: 100%;
+    display: block;
+}
+
+.wlcslcgrid{
+    position: relative;
+    top: 0px;
+}
+
+.wlcMSGChanSLC{
+    position: relative;
+    left: 0px;
+    top: -5px;
+    width: 100%;
+    display: block;
+}
+
+.msgGrid{
+    position: relative;
+    top: 0;
+}
+
+.welcomeTF{
+    width: 100%;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    resize: none;
+    height: 100px;
+}
+
+.welcomeTSZ{
+    font-size: 15px;
+}
+
+.root{
+    width: 70px; 
+    height: 40px; 
+    padding: 0px; 
+    margin: 0px; 
+    position: absolute; 
+    right: 5px; 
+    vertical-align: baseline; 
+    top: 50%; 
+    transform: translateY(-50%);
+}
+
+.switchBase{
+    padding: 1px;
+}
+
+.switchBase:checked{
+    transform: translateX(31px);
+    color: #ffffff;
+}
+
+.switchBase:checked + .track{
+    background-color: #52d869;
+    opacity: 1;
+    border: none;
+}
+
+.thumb{
+    height: 30px;
+    width: 30px;
+    position: relative;
+    top: 6px;
+    left: 4px;
+}
+
+.track {
+    border-radius: 19px;
+    border: 1px solid #e0e0e0;
+    background-color: #eeeeee;
+    height: 35px;
+    opacity: 1;
+    margin-top: 4px;
+}
+
+.checked{
+    
+}
+
+.focusVisible{
+
+}
+
+@media only screen and (max-width: 800px) {
+    .homeImg {
+        display: none;
+    }
+    .normallyInvis{
+        display: flex;
+    }
+    .menuButton{
+        width: 24px;
+    }
+    .menuButtonText{
+        display: none;
+    }
+
+}
+
+@media only screen and (max-width: 700px) {
+    .thumb {
+        height: 28px;
+        width: 28px;
+    }
+    
+    
+}
+
+@media only screen and (max-width: 650) {
+    .welcomeCardTitle {
+        font-size: 18px;
+    }
+    
+    
+}
