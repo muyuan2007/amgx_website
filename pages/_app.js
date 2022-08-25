@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
     
 
     useEffect(async () => {
-        await fetch('https://www.amgx-bot.com/api/auth/session').then(response => response.json()).then(data => setSession(data)).catch(error => console.log(error))
+        await fetch('https://www.amgx-bot.com/api/auth/session').then(response => response.json()).then(data => setSession(data)).catch(error => 
 
     },[])
     const id = useRouter().query.guildid

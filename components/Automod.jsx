@@ -1458,7 +1458,7 @@ const BlacklistBasedSet = (props) => {
     
     changePunishSize()
     let categoryInfo = categories
-    console.log(getIndex(event, 'punishments'))
+    
     const index = getIndex(event, 'punishments').index
     const whole = getIndex(event, 'punishments').whole
     const durationNode = Array.from(wholeThing.current.getElementsByClassName('duration'))[index];
@@ -1610,8 +1610,8 @@ const BlacklistBasedSet = (props) => {
     const grid = target.parentElement.parentElement.parentElement.parentElement.parentElement
     const wordInputs = Array.from(target.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName('inputWords'))
     const index = getIndex(event, "inputWords").index
-    console.log(getIndex(event, "inputWords").index)
-    console.log(target)
+    
+    
     var addedWords = categories[index].words;
     const checked = Array.from(grid.getElementsByClassName('searchForSubs'))[index].checked
     var toExact = ""
@@ -1698,7 +1698,7 @@ const BlacklistBasedSet = (props) => {
 
   const getIndex = (e, className) => {
     if (e.target.tagName == 'LI') {
-      console.log(parseInt(e.target.parentElement.className.slice(42)))
+      
       return { index: parseInt(e.target.parentElement.className.slice(42)), whole: e.target.parentElement.parentElement.parentElement.parentElement }
     }
     if (e.target.tagName == 'svg' && e.target.className.animVal == 'MuiSvgIcon-root MuiSvgIcon-fontSizeSmall') {
@@ -1940,7 +1940,7 @@ const BlacklistBasedSet = (props) => {
 }
 
 const CatProfileBasedSet = (props) => {
-  console.log(props.categories)
+  
 
   const [categories, setCategories] = useState(props.categories)
   const onPunishTagsChange = (event, values, reason, detail) => {
@@ -2166,7 +2166,7 @@ const CatProfileBasedSet = (props) => {
 
 
       }
-      console.log(categories)
+      
       addedWords[String(Array.from(values)[Array.from(values).length - 1])] = toExact
 
     }

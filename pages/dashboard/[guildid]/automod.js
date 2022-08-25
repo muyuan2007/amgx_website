@@ -400,7 +400,7 @@ export async function getServerSideProps(context) {
             general = res.rows[0]
         }
     }  
-    ).catch(error => {erred = true; console.log(error)})
+    ).catch(error => {erred = true; 
 
     await checkIfIdExists('messagespam').then(res => {
         if (res.rows.length > 0) {

@@ -26,7 +26,7 @@ function Guilds(props) {
         let token = ''
         var fetchUser = fetch('https://www.amgx-bot.com/api/auth/session').then(response => response.json()).then((data) => data.accessToken).then((data) => { return data })
         await fetchUser.then(data => { token = data })
-        console.log(token)
+        
         await fetch('https://discord.com/api/users/@me/guilds', {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -34,7 +34,7 @@ function Guilds(props) {
         }).then(response => {
             if (response.status !== 200) { setE(true); return }
             response.json().then(function (data) { let guildInfo = []; Array.from(data).forEach(guild => { if (guild.permissions >= manager) { guildInfo.push(guild) } }); setGuilds(guildInfo) })
-        }).catch(() => { console.log('messed up') })
+        }).catch(() => { 
     }, [])
     if (guilds.length > 0) {
         const ids = guilds.map(guild => guild.id)
