@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
     
 
     useEffect(async () => {
-        await fetch('https://www.amgx-bot.com/api/auth/session').then(response => response.json()).then(data => setSession(data)).catch(error => 
+        await fetch('https://www.amgx-bot.com/api/auth/session').then(response => response.json()).then(data => setSession(data)).catch(error => console.log(error))
 
     },[])
     const id = useRouter().query.guildid
@@ -53,6 +53,9 @@ function MyApp({ Component, pageProps }) {
     else {
 
         return (<SessionProvider session={pageProps.session}>
+            <Head>
+            <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Top loggedIn={false} signin={() => signIn('discord','https://www.amgx-bot.com/api/auth/callback/discord')}/>
           <Component {...pageProps} /></SessionProvider>
           )

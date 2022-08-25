@@ -29,7 +29,7 @@ function AutoKicker(props) {
             router.push('https://www.amgx-bot.com')
         }
         else if (!inguild && !props.erred) {
-            router.push(`https://discord.com/oauth2/authorize?&client_id=834072169507848273&scope=bot&permissions=8&guild_id=${guildid}&response_type=code&redirect_uri=https%3A%2F%2Fwww.amgx-bot.com%2Fapi%2Fauth%2Fcallback%2Fdiscord`)
+            router.push(`https://discord.com/api/oauth2/authorize?client_id=834072169507848273&permissions=8&scope=bot`)
         }
     },[]);
     const colors = {'General Settings': 'white','Automod': 'white','Logging': 'white','Autopunish': 'white','Auto Kick/Ban': 'lightgray','Weblogs': 'white'}
