@@ -63,7 +63,7 @@ const TopPart = (props) => {
     if (props.loggedIn) {
         section = <Grid container style={{width:"100%"}} spacing={2} >
             <Grid item xs={12} sm={6}>
-            <Link href="https://discord.com/api/oauth2/authorize?client_id=834072169507848273&permissions=8&redirect_uri=https%3A%2F%2Fwww.amgx-bot.com%2Fapi%2Fauth%2Fcallback%2Fdiscord&response_type=code&scope=bot%20identify%20guilds">
+            <Link href="https://discord.com/api/oauth2/authorize?client_id=834072169507848273&permissions=8&scope=bot">
             <Button style={{backgroundColor: 'lightgray', height: 50, border: '3px solid black', width: "100%"}}><AddIcon /><span style={{textTransform: "initial",fontSize: 18, position: "relative",left: 10}}>Invite bot</span></Button>
             </Link>
             </Grid>

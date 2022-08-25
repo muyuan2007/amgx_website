@@ -108,7 +108,7 @@ function Top(props) {
 {menu}
 <Grid id="buttons" style={{position: 'relative', width: style.width}} container>
 <button className={classes.normallyInvis} style={{background: "transparent", color: "white", border: 'none'}}><HomeIcon style={{color: "white", width: 21, lineHeight: 52}}/></button>
-<Link href="https://discord.com/api/oauth2/authorize?client_id=834072169507848273&permissions=8&redirect_uri=https%3A%2F%2Fwww.amgx-bot.com%2Fapi%2Fauth%2Fcallback%2Fdiscord&response_type=code&scope=bot%20identify%20guilds">
+<Link href="https://discord.com/api/oauth2/authorize?client_id=834072169507848273&permissions=8&scope=bot">
 <button style={{background: "transparent", color: "white", border: 'none'}}><AddIcon style={{color: "white", width: 21, lineHeight: 52}}/><span style={{marginLeft: 5, textTransform: "initial", fontSize: 15, color: "white", verticalAlign: `${top}%`}} className={classes.menuButtonText}>Invite</span></button>
 </Link>
 <Link href="https://discord.gg/bbqBzpmt6A" >
