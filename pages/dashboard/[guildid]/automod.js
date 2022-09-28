@@ -59,7 +59,7 @@ function Automod(props) {
         
         <Drawer
         
-            id="nav" style={{zIndex:2,backgroundColor: 'lightgray', height: '100vw',position: 'absolute', width: drawerWidth}}
+            id="nav" style={{zIndex:2,backgroundColor: 'lightgray', height: 'calc(100vh - 60px)',position: 'absolute', width: drawerWidth}}
             variant="permanent"
             anchor="left"
         >
@@ -400,7 +400,7 @@ export async function getServerSideProps(context) {
             general = res.rows[0]
         }
     }  
-    ).catch(error => {erred = true; 
+    ).catch(error => {erred = true; })
 
     await checkIfIdExists('messagespam').then(res => {
         if (res.rows.length > 0) {

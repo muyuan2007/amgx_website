@@ -67,7 +67,7 @@ function Modlog(props) {
         </Head>
         <Box className={'uuu'}style={{ display: 'flex', position: 'relative', top:60 }}>
         <Drawer
-            id="nav" style={{zIndex:2,backgroundColor: 'lightgray', height: '100vw',position: 'absolute', width: drawerWidth}}
+            id="nav" style={{zIndex:2,backgroundColor: 'lightgray', height: 'calc(100vh - 60px)',position: 'absolute', width: drawerWidth}}
             variant="permanent"
             anchor="left"
           >
@@ -112,18 +112,26 @@ function Modlog(props) {
 export default Modlog
 
 export async function getServerSideProps(context) {
+    const logactions = {"Message Events":["Message Deleted", "Message Edited", "Message Bulk Deletion"], "Member Events":[
+        "Username Changed","Avatar Changed", "Nickname Changed", "Roles Changed", "Member Joined", 
+        "Member Left"], "Moderation Events":["Member Warned", "Infraction Removed", "Member Muted","Member Unmuted", "Member Kicked", "Member Tempbanned", 
+        "Member Banned","Member Unbanned"], "Server Changes":["Emoji Added","Emoji Updated","Emoji Deleted","Channel Created","Channel Updated","Channel Deleted"
+        , "Role Created","Role Updated","Role Deleted","Server Name Changed","Server Icon Changed","Discovery Splash Changed","AFK Channel Changed","System Channel Changed","Default Notifications Changed","AFK Timeout Changed","Bot Added",
+        "Bot Removed", "Invite Splash Changed","Banner Changed","Explicit Filter Changed",
+        "Verification Level Changed","Invite Created","Invite Deleted","MFA Changed","Server Owner Changed"], "Voice Channel Events":["Member Joined VC",
+        "Member Left VC","Member Moved"]}
     let botobj = {}
     let channels = []
     let messageChannel = 0
-    let messageActions = []
+    let messageActions = logactions["Message Events"]
     let memberChannel = 0
-    let memberActions = []
+    let memberActions = logactions["Member Events"]
     let moderationChannel = 0
-    let moderationActions = []
+    let moderationActions = logactions["Moderation Events"]
     let serverChannel = 0
-    let serverActions = []
+    let serverActions = logactions["Server Events"]
     let vcChannel = 0
-    let vcActions = []
+    let vcActions =logactions["Voice Channel Events"]
     let erred = false
 
     const guildid = context.params.guildid

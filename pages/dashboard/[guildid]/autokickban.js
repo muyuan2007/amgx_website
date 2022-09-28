@@ -43,7 +43,7 @@ function AutoKicker(props) {
     
     <Drawer
     
-        id="nav" style={{zIndex:2,backgroundColor: 'lightgray', height: '100vw',position: 'absolute', width: drawerWidth}}
+        id="nav" style={{zIndex:2,backgroundColor: 'lightgray', height: 'calc(100vh - 60px)',position: 'absolute', width: drawerWidth}}
         variant="permanent"
         anchor="left"
       >
@@ -67,7 +67,7 @@ function AutoKicker(props) {
         sx={{ flexGrow: 1, bgcolor: 'background.default' } }
         style={{zIndex:1,width: `calc(100% - ${drawerWidth}px)`, position:'absolute', left: drawerWidth, top: 50}}
       >
-    <AutoKickBan server={guildid} kickRules={props.kickRules} banRules={props.banRules}/>
+    <AutoKickBan server={guildid} kickRules={props.kickRules} banRules={props.banRules} usrn={'Press enter to add a username'} stsn={'Press enter to add a status'}/>
     </Box></Box>
     </Fragment>
     } else {
@@ -102,9 +102,9 @@ export async function getServerSideProps(context) {
         }).then(response => response.json()).then(data => {botobj = data})
     
     let inguild = botobj instanceof Array
-    
-    let kickRules = []
-    let banRules = []
+    const badProfiles = { 'hitler': 'Substring', 'nazi': 'Substring', 'adolf': 'Substring', 'holocaust': 'Substring', 'auschwitz': 'Substring', 'rapist': 'Substring', 'porn': 'Substring', 'molest': 'Substring', 'traffick': 'Substring', 'rape': 'NoSubstring', 'raping': 'NoSubstring', 'pedo': 'Substring', 'paedo': 'Substring', 'sex': 'NoSubstring'}
+    let kickRules = [{"type": "accountAge", "timeVal": 7, "timeUnit": "days", "usernames": {}, "statuses": {}},{"type": "promoName", "timeVal": 24, "timeUnit": "hours", "usernames": {}, "statuses": {}}]
+    let banRules = [{"type": "nsfwpfp", "timeVal": 24, "timeUnit": "hours", "usernames": {}, "statuses": {}},{"type": "username", "timeVal": 24, "timeUnit": "hours", "usernames": badProfiles, "statuses": {}},{"type": "status", "timeVal": 24, "timeUnit": "hours", "usernames": {}, "statuses": badProfiles}]
     
     function checkIfIdExists() {
         return new Promise((resolve, reject) => {

@@ -474,7 +474,7 @@ const AutoKickBan = (props) => {
                 <div className={'username'} style={{position: 'relative',left: 10, width: 'calc(100% - 20px)', display: 'none'}}>
                 <footer style={{padding: 10}}></footer>
                 <Typography style={{fontSize: 18}}>Enter usernames</Typography>
-                <Autocomplete value={Object.keys(rule.usernames)}onChange={usernameKickChange} className={'inputUsername'} multiple options={[]} freeSolo style={{width: '100%'}} renderInput={(params) => <TextField {...params}/>}/>
+                <Autocomplete placeholder={props.usrn} value={Object.keys(rule.usernames)}onChange={usernameKickChange} className={'inputUsername'} multiple options={[]} freeSolo style={{width: '100%'}} renderInput={(params) => <TextField placeholder={props.usrn} {...params}/>}/>
                 <footer style={{padding: 3}}></footer>
                 <input className={'usernameSub'} type='checkbox' style={{width: 18, height: 18, margin: 0}}/><span style={{fontSize: 18, position: 'relative', left: 10, margin: 0, top: -2.5}}>Search for substrings</span>
                 <footer style={{padding: 10}}></footer>
@@ -482,7 +482,7 @@ const AutoKickBan = (props) => {
                 <div className={'status'} style={{position: 'relative',left: 10, width: 'calc(100% - 20px)', display: 'none'}}>
                 <footer style={{padding: 10}}></footer>
                 <Typography style={{fontSize: 18}}>Enter statuses</Typography>
-                <Autocomplete onChange={statusKickChange} value={Object.keys(rule.statuses)} className={'inputStatus'} multiple options={[]} freeSolo style={{width: '100%'}} renderInput={(params) => <TextField {...params}/>}/>
+                <Autocomplete placeholder={props.stsn} onChange={statusKickChange} value={Object.keys(rule.statuses)} className={'inputStatus'} multiple options={[]} freeSolo style={{width: '100%'}} renderInput={(params) => <TextField placeholder={props.stsn}{...params}/>}/>
                 <footer style={{padding: 3}}></footer>
                 <input className={'statusSub'} type='checkbox' style={{width: 18, height: 18, margin: 0}}/><span style={{fontSize: 18, position: 'relative', left: 10, margin: 0, top: -2.5}}>Search for substrings</span>
                 <footer style={{padding: 10}}></footer>
@@ -525,7 +525,7 @@ const AutoKickBan = (props) => {
                 <div className={'username'} style={{position: 'relative',left: 10, width: 'calc(100% - 20px)', display: 'none'}}>
                 <footer style={{padding: 10}}></footer>
                 <Typography style={{fontSize: 18}}>Enter usernames</Typography>
-                <Autocomplete defaultValue={Object.keys(rule.usernames)}onChange={usernameBanChange} className={'inputUsername'} multiple options={[]} freeSolo style={{width: '100%'}} renderInput={(params) => <TextField {...params}/>}/>
+                <Autocomplete placeholder={props.usrn} defaultValue={Object.keys(rule.usernames)}onChange={usernameBanChange} className={'inputUsername'} multiple options={[]} freeSolo style={{width: '100%'}} renderInput={(params) => <TextField placeholder={props.usrn} {...params}/>}/>
                 <footer style={{padding: 3}}></footer>
                 <input className={'usernameSub'} type='checkbox' style={{width: 18, height: 18, margin: 0}}/><span style={{fontSize: 18, position: 'relative', left: 10, margin: 0, top: -2.5}}>Search for substrings</span>
                 <footer style={{padding: 10}}></footer>
@@ -533,7 +533,7 @@ const AutoKickBan = (props) => {
                 <div className={'status'} style={{position: 'relative',left: 10, width: 'calc(100% - 20px)', display: 'none'}}>
                 <footer style={{padding: 10}}></footer>
                 <Typography style={{fontSize: 18}}>Enter statuses</Typography>
-                <Autocomplete onChange={statusBanChange} defaultValue={Object.keys(rule.statuses)} className={'inputStatus'} multiple options={[]} freeSolo style={{width: '100%'}} renderInput={(params) => <TextField {...params}/>}/>
+                <Autocomplete placeholder={props.stsn} onChange={statusBanChange} defaultValue={Object.keys(rule.statuses)} className={'inputStatus'} multiple options={[]} freeSolo style={{width: '100%'}} renderInput={(params) => <TextField placeholder={props.stsn} {...params}/>}/>
                 <footer style={{padding: 3}}></footer>
                 <input className={'statusSub'} type='checkbox' style={{width: 18, height: 18, margin: 0}}/><span style={{fontSize: 18, position: 'relative', left: 10, margin: 0, top: -2.5}}>Search for substrings</span>
                 <footer style={{padding: 10}}></footer>

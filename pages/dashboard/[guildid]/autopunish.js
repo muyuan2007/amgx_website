@@ -42,7 +42,7 @@ function Autopunisher(props) {
 
                 <Drawer
 
-                    id="nav" style={{ zIndex: 2, backgroundColor: 'lightgray', height: '100vw', position: 'absolute', width: drawerWidth }}
+                    id="nav" style={{ zIndex: 2, backgroundColor: 'lightgray', height: 'calc(100vh - 60px)', position: 'absolute', width: drawerWidth }}
                     variant="permanent"
                     anchor="left"
                 >
@@ -80,7 +80,7 @@ function Autopunisher(props) {
 
 export async function getServerSideProps(context) {
     const guildid = context.params.guildid
-    let rules = []
+    let rules = [{'type':"mute", "durationType": "hours", "duration": 6, "threshold": 15},{'type':"kick", "durationType": "minutes", "duration": 1, "threshold": 30},{'type':"tempban", "durationType": "days", "duration": 3, "threshold": 45},{'type':"ban", "durationType": "minutes", "duration": 1, "threshold": 60}]
     const botToken = process.env.BOT_TOKEN
     let erred = false
     const { Pool, Client } = require('pg')

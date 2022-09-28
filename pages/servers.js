@@ -8,7 +8,6 @@ import Head from 'next/head'
 
 
 function Guilds(props) {
-    const manager = 1312280161
     const [guilds, setGuilds] = useState([])
     const [e, setE] = useState(false)
     let loggedIn = false
@@ -33,14 +32,17 @@ function Guilds(props) {
             }
         }).then(response => {
             if (response.status !== 200) { setE(true); return }
-            response.json().then(function (data) { let guildInfo = []; Array.from(data).forEach(guild => { if (guild.permissions >= manager) { guildInfo.push(guild) } }); setGuilds(guildInfo) })
-        }).catch(() => { 
+            response.json().then(function (data) { let guildInfo = Array.from(data).filter(guild => {return String(guild['permissions']&32)=='32'});setGuilds(guildInfo);
+            if (guilds.length > 0) {
+                const ids = guilds.map(guild => guild.id)
+                localStorage.setItem('guilds', ids)
+    
+            }
+            
+        })
+        })
+       
     }, [])
-    if (guilds.length > 0) {
-        const ids = guilds.map(guild => guild.id)
-        localStorage.setItem('guilds', ids)
-
-    }
     if (!e) {
         return <Fragment>
         <Head>
@@ -63,7 +65,7 @@ function Guilds(props) {
 
 
 
-}
+    }
+
 
 export default Guilds
-

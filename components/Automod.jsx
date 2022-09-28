@@ -16,6 +16,17 @@ const newC = 'There are no categories, click "CREATE NEW CATEGORY" to add one!'
 const equals = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const icons = { "General Settings": <SettingsIcon />, "Automod": <SecurityIcon />, "Logging": <ListIcon />, "Autopunish": <GavelIcon />, "Auto Kick/Ban": <PolicyIcon />, "Weblogs": <FormatListNumbered /> }
 
+
+function punishmentSort(punishments) {
+  const punish_obj = {'Delete message':1,'Mute':2,'Warn':3,'Kick':4,'Tempban':5,'Ban':6}
+  const p = punishments.sort(
+    (pu1, pu2) => punish_obj[pu1] - punish_obj[pu2],
+  )
+  
+  return p
+  
+}
+
 const Gap = () => {
   return (
     <>
@@ -77,12 +88,12 @@ class General extends React.Component {
           <Typography style={{ position: "relative", fontSize: 30, left: 10, fontFamily: "verdana", top: 0, width: "calc(100% - 80px)" }}>General Settings</Typography>
           <footer style={{ padding: "5px 0" }}></footer>
           <Grid xs={12} style={{ width: "calc(100% - 20px)", position: "relative", left: 10 }}>
+            <Typography style={{ fontSize: 16, width: "100%", display: "block" }}>Whitelisted channels</Typography>
+            <Autocomplete defaultValue={Object.keys(this.props.channelobj).filter(f => Object.values(this.props.channel_whitelists).includes(this.props.channelobj[f]))} multiple options={Object.keys(this.props.channelobj)} onChange={this.onChannelChange} renderInput={(params) => <TextField {...params} />}></Autocomplete>
+            <footer className={classes.footerInBetween}></footer>
             <Typography style={{ fontSize: 16, width: "100%", display: "block" }}>Whitelisted roles</Typography>
             <Autocomplete multiple options={this.props.roles} defaultValue={Object.keys(this.props.roleobj).filter(f => Object.values(this.props.role_whitelists).includes(this.props.roleobj[f]))} onChange={this.onRoleChange}
               renderInput={(params) => <TextField {...params} />}></Autocomplete>
-            <footer className={classes.footerInBetween}></footer>
-            <Typography style={{ fontSize: 16, width: "100%", display: "block" }}>Whitelisted channels</Typography>
-            <Autocomplete defaultValue={Object.keys(this.props.channelobj).filter(f => Object.values(this.props.channel_whitelists).includes(this.props.channelobj[f]))} multiple options={Object.keys(this.props.channelobj)} onChange={this.onChannelChange} renderInput={(params) => <TextField {...params} />}></Autocomplete>
             <footer className={classes.footerInBetween}></footer>
           </Grid>
         </CardContent>
@@ -266,7 +277,7 @@ class SpamAutomodSet extends React.Component {
 
 
     this.setState({
-      availableOptions: available
+      availableOptions: punishmentSort(available)
     })
 
 
@@ -604,7 +615,7 @@ class NABasedAutomodSet extends React.Component {
       var temp = available.filter(ok)
       available = temp
     } else {
-      if (((reason === 'remove-option' || reason === 'clear') || reason === 'clear') && detail.option == "Ban") {
+      if (reason === 'remove-option' && detail.option == "Ban") {
         if (!available.includes("Kick")) {
           available.push("Kick")
         }
@@ -630,7 +641,7 @@ class NABasedAutomodSet extends React.Component {
     }
 
     this.setState({
-      availableOptions: available
+      availableOptions: punishmentSort(available)
     })
 
 
@@ -952,7 +963,7 @@ class TAAutomodSet extends React.Component {
       var temp = available.filter(ok)
       available = temp
     } else {
-      if (((reason === 'remove-option' || reason === 'clear') || reason === 'clear') && detail.option == "Ban") {
+      if (reason === 'remove-option' && detail.option == "Ban") {
         if (!available.includes("Kick")) {
           available.push("Kick")
         }
@@ -978,7 +989,7 @@ class TAAutomodSet extends React.Component {
     }
 
     this.setState({
-      availableOptions: available
+      availableOptions: punishmentSort(available)
     })
 
 
@@ -1281,7 +1292,7 @@ class Selfbot extends React.Component {
       var temp = available.filter(ok)
       available = temp
     } else {
-      if (((reason === 'remove-option' || reason === 'clear') || reason === 'clear') && detail.option == "Ban") {
+      if (reason === 'remove-option' && detail.option == "Ban") {
         if (!available.includes("Kick")) {
           available.push("Kick")
         }
@@ -1307,7 +1318,7 @@ class Selfbot extends React.Component {
     }
 
     this.setState({
-      availableOptions: available
+      availableOptions: punishmentSort(available)
     })
 
 
@@ -1460,7 +1471,7 @@ const BlacklistBasedSet = (props) => {
     let categoryInfo = categories
     
     const index = getIndex(event, 'punishments').index
-    const whole = getIndex(event, 'punishments').whole
+    console.log(index)
     const durationNode = Array.from(wholeThing.current.getElementsByClassName('duration'))[index];
     const pointNode = Array.from(wholeThing.current.getElementsByClassName('warnpoints'))[index];
     var available = categories[index].availableOptions;
@@ -1487,7 +1498,7 @@ const BlacklistBasedSet = (props) => {
       var temp = available.filter(ok)
       available = temp
     } else {
-      if (((reason === 'remove-option' || reason === 'clear') || reason === 'clear') && detail.option == "Mute") {
+      if (reason === 'remove-option' && detail.option == "Mute") {
         if (!available.includes("Kick")) {
           available.push("Kick")
         }
@@ -1508,7 +1519,7 @@ const BlacklistBasedSet = (props) => {
       var temp = available.filter(ok)
       available = temp
     } else {
-      if (((reason === 'remove-option' || reason === 'clear') || reason === 'clear') && detail.option == "Warn") {
+      if (reason === 'remove-option' && detail.option == "Warn") {
         if (!available.includes("Kick")) {
           available.push("Kick")
         }
@@ -1529,7 +1540,7 @@ const BlacklistBasedSet = (props) => {
       var temp = available.filter(ok)
       available = temp
     } else {
-      if ((reason === 'remove-option' || reason === 'clear') && detail.option == "Kick") {
+      if (reason === 'remove-option' && detail.option == "Kick") {
         if (!available.includes("Mute")) {
           available.push("Mute")
         }
@@ -1550,7 +1561,7 @@ const BlacklistBasedSet = (props) => {
       const temp = available.filter(ok)
       available = temp
     } else {
-      if ((reason === 'remove-option' || reason === 'clear') && detail.option == "Tempban") {
+      if (reason === 'remove-option' && detail.option == "Tempban") {
         if (!available.includes("Kick")) {
           available.push("Kick")
         }
@@ -1571,7 +1582,7 @@ const BlacklistBasedSet = (props) => {
       var temp = available.filter(ok)
       available = temp
     } else {
-      if (((reason === 'remove-option' || reason === 'clear') || reason === 'clear') && detail.option == "Ban") {
+      if (reason === 'remove-option' && detail.option == "Ban") {
         if (!available.includes("Kick")) {
           available.push("Kick")
         }
@@ -1592,7 +1603,13 @@ const BlacklistBasedSet = (props) => {
       }
     }
 
-    categoryInfo[index].availableOptions = available
+    if (reason === 'clear') {
+      available = ['Delete message', 'Mute', 'Warn', 'Kick', 'Tempban', 'Ban']
+    }
+
+    
+
+    categoryInfo[index].availableOptions = punishmentSort(available)
 
     setCategories([...categoryInfo])
 
@@ -1641,7 +1658,7 @@ const BlacklistBasedSet = (props) => {
     let categoryInfo = categories
     const target = event.target
     const timeValInputs = Array.from(target.parentElement.parentElement.parentElement.parentElement.getElementsByClassName('duration'))
-    const index = timeValInputs.indexOf(target.parentElement.parentElement)
+    const index = timeValInputs.indexOf(target.parentElement)
     const timeunit = target.parentElement.children[1].value
 
     categoryInfo[index].timeval = parseInt(target.value)
@@ -1665,7 +1682,7 @@ const BlacklistBasedSet = (props) => {
     let categoryInfo = categories
     const target = event.target
     const timeUnitInputs = Array.from(target.parentElement.parentElement.parentElement.parentElement.getElementsByClassName('duration'))
-    const index = timeUnitInputs.indexOf(target.parentElement.parentElement)
+    const index = timeUnitInputs.indexOf(target.parentElement)
     categoryInfo[index].timeunit = target.value
     const timeval = target.parentElement.children[0].value
     if (timeunit == 'seconds') {
@@ -1691,7 +1708,7 @@ const BlacklistBasedSet = (props) => {
 
   const onPointChange = (e) => {
     let categoryInfo = categories
-    categoryInfo[Array.from(e.target.parentElement.parentElement.parentElement.parentElement.getElementsByClassName('warnpoints')).indexOf(e.target.parentElement.parentElement)].points = parseInt(e.target.value)
+    categoryInfo[Array.from(e.target.parentElement.parentElement.parentElement.parentElement.getElementsByClassName('warnpoints')).indexOf(e.target.parentElement)].points = parseInt(e.target.value)
 
     setCategories([...categoryInfo])
   }
@@ -1703,19 +1720,19 @@ const BlacklistBasedSet = (props) => {
     }
     if (e.target.tagName == 'svg' && e.target.className.animVal == 'MuiSvgIcon-root MuiSvgIcon-fontSizeSmall') {
       const target = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
-      const index = Array.from(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName(className)).indexOf(target)
+      const index = Array.from(wholeThing.current.getElementsByClassName(className)).indexOf(target)
       return { index: index, whole: e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement }
     }
     if (e.target.tagName == 'svg' && e.target.className.animVal == 'MuiSvgIcon-root MuiChip-deleteIcon') {
       const target = e.target.parentElement.parentElement.parentElement.parentElement
-      const index = Array.from(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName(className)).indexOf(target)
+      const index = Array.from(wholeThing.current.getElementsByClassName(className)).indexOf(target)
       return { index: index, whole: e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement }
 
     }
     if (e.target.tagName == 'path') {
       if (e.target.outerHTML == '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>') {
         const target = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
-        const index = Array.from(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName(className)).indexOf(target)
+        const index = Array.from(wholeThing.current.getElementsByClassName(className)).indexOf(target)
         return { index: index, whole: e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement }
 
       }
@@ -1729,13 +1746,14 @@ const BlacklistBasedSet = (props) => {
     }
     if (e.target.tagName == 'BUTTON') {
       const target = e.target.parentElement.parentElement.parentElement.parentElement
-      const index = Array.from(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName(className)).indexOf(target)
+      const index = Array.from(wholeThing.current.getElementsByClassName(className)).indexOf(target)
       return { index: index, whole: e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement }
 
     }
     if (e.target.tagName == 'INPUT') {
       const target = e.target.parentElement.parentElement.parentElement
-      const index = Array.from(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName(className)).indexOf(target)
+      console.log(target)
+      const index = Array.from(wholeThing.current.getElementsByClassName(className)).indexOf(target)
       return { index: index, whole: e.target.parentElement.parentElement.parentElement.parentElement.parentElement }
 
     }
@@ -1773,8 +1791,11 @@ const BlacklistBasedSet = (props) => {
 
   const changePunishSize = () => {
     const finders = Array.from(wholeThing.current.getElementsByClassName("punishments"))
-    finders.forEach(e => e.style.height = `${e.children[0].offsetHeight}px`)
+    finders.forEach(e => {e.style.height = `${e.children[0].offsetHeight}px`})
+    const titles = Array.from(wholeThing.current.getElementsByClassName("title"))
+    titles.forEach(e => {const w = e.parentElement.parentElement.parentElement.parentElement.parentElement.offsetWidth; if (w <= 282) {e.style.width = '100%'} else {e.style.width = '200px'}})
   }
+
 
   useEffect(() => {
     categories.forEach(category => {
@@ -1863,7 +1884,7 @@ const BlacklistBasedSet = (props) => {
     categorySection = categories.map((category) => {
       const whitelistCh = Object.keys(props.channelobj).filter(f => Object.values(category.whitelistedChannels).includes(props.channelobj[f]))
       return <div key={categories.indexOf(category)} className={'category'}>
-        <TextField style={{ width: 200 }} className={'title'} defaultValue={category.title} onInput={setTitle} /><IconButton onClick={deleteRule} className={`delete ${categories.indexOf(category)}`} style={{ color: 'red', height: 35, width: 35, position: 'relative', top: 'calc(100% - 17.5px)' }} component="span"> <CloseIcon /> </IconButton>
+        <TextField className={'title'} value={category.title} onInput={setTitle} /><IconButton onClick={deleteRule} className={`delete ${categories.indexOf(category)}`} style={{ color: 'red', height: 35, width: 35, position: 'relative', top: 'calc(100% - 17.5px)' }} component="span"> <CloseIcon /> </IconButton>
         <footer style={{ padding: "10px 0" }}></footer>
         <Typography style={{ fontSize: 15, width: "100%", display: "block" }}>Words</Typography>
         <Autocomplete className={'inputWords'} multiple onChange={onWordsChange} value={Object.keys(category.words)} freeSolo options={[]} renderInput={(params) => <TextField {...params} placeholder={props.placehold} />} />
@@ -1882,9 +1903,9 @@ const BlacklistBasedSet = (props) => {
           <footer style={{ padding: "10px 0" }}></footer>
           <input defaultValue={category.timeval} onInput={onTimevalChange} style={{ height: 30, fontSize: 18, width: `calc(100% - 110px)` }} type="number" /><select onChange={onTimeunitChange} defaultValue={category.timeunit} style={{ width: 100, position: "absolute", fontSize: 16, height: 30, right: 0 }}><option value={"seconds"}>Seconds</option> <option value={"minutes"}>Minutes</option> <option value={"hours"}>Hours</option> <option value={"days"}>Days</option></select>
         </div>
-        <div style={{ display: "none" }} className={'warnpoints'}>
+        <div style={{ display: "none" , position: "relative"}} className={'warnpoints'}>
           <footer style={{ padding: "10px 0" }}></footer>
-            <input onInput={onPointChange} defaultValue={category.points} style={{ height: 30, fontSize: 18, width: `calc(100% - 80px)` }} type="number" /><Typography style={{ width: 80, textAlign: "right", fontSize: 16, position: "absolute", right: 0, top: "calc(50% - 2px)" }}>Points</Typography>
+            <input onInput={onPointChange} defaultValue={category.points} style={{ height: 30, fontSize: 18, width: `calc(100% - 80px)` }} type="number" /><Typography style={{ width: 80, textAlign: "right", fontSize: 16, position: "absolute", right: 0, top: "26px" }}>Points</Typography>
         </div>
         </Grid>
         <Gap></Gap>
@@ -2060,7 +2081,7 @@ const CatProfileBasedSet = (props) => {
       var temp = available.filter(ok)
       available = temp
     } else {
-      if (((reason === 'remove-option' || reason === 'clear') || reason === 'clear') && detail.option == "Ban") {
+      if (reason === 'remove-option' && detail.option == "Ban") {
         if (!available.includes("Kick")) {
           available.push("Kick")
         }
@@ -2087,7 +2108,7 @@ const CatProfileBasedSet = (props) => {
 
 
 
-    categoryInfo[index].availableOptions = available
+    categoryInfo[index].availableOptions = punishmentSort(available)
 
     setCategories([...categoryInfo])
 
@@ -2096,7 +2117,9 @@ const CatProfileBasedSet = (props) => {
 
   const changePunishSize = () => {
     const finders = Array.from(wholeThing.current.getElementsByClassName("punishments"))
-    finders.forEach(e => e.style.height = `${e.children[0].offsetHeight}px`)
+    finders.forEach(e => {e.style.height = `${e.children[0].offsetHeight}px`})
+    const titles = Array.from(wholeThing.current.getElementsByClassName("title"))
+    titles.forEach(e => {const w = e.parentElement.parentElement.parentElement.parentElement.parentElement.offsetWidth; if (w <= 282) {e.style.width = '100%'} else {e.style.width = '200px'}})
   }
 
   const wholeThing = React.useRef()
@@ -2228,7 +2251,7 @@ const CatProfileBasedSet = (props) => {
 
   const onPointChange = (e) => {
     let categoryInfo = categories
-    categoryInfo[Array.from(e.target.parentElement.parentElement.parentElement.parentElement.getElementsByClassName('warnpoints')).indexOf(e.target.parentElement.parentElement)].points = parseInt(e.target.value)
+    categoryInfo[Array.from(e.target.parentElement.parentElement.parentElement.parentElement.getElementsByClassName('warnpoints')).indexOf(e.target.parentElement)].points = parseInt(e.target.value)
 
     setCategories([...categoryInfo])
   }
@@ -2239,19 +2262,19 @@ const CatProfileBasedSet = (props) => {
     }
     if (e.target.tagName == 'svg' && e.target.className.animVal == 'MuiSvgIcon-root MuiSvgIcon-fontSizeSmall') {
       const target = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
-      const index = Array.from(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName(className)).indexOf(target)
+      const index = Array.from(wholeThing.current.getElementsByClassName(className)).indexOf(target)
       return { index: index, whole: e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement }
     }
     if (e.target.tagName == 'svg' && e.target.className.animVal == 'MuiSvgIcon-root MuiChip-deleteIcon') {
       const target = e.target.parentElement.parentElement.parentElement.parentElement
-      const index = Array.from(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName(className)).indexOf(target)
+      const index = Array.from(wholeThing.current.getElementsByClassName(className)).indexOf(target)
       return { index: index, whole: e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement }
 
     }
     if (e.target.tagName == 'path') {
       if (e.target.outerHTML == '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>') {
         const target = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
-        const index = Array.from(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName(className)).indexOf(target)
+        const index = Array.from(wholeThing.current.getElementsByClassName(className)).indexOf(target)
         return { index: index, whole: e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement }
 
       }
@@ -2265,13 +2288,13 @@ const CatProfileBasedSet = (props) => {
     }
     if (e.target.tagName == 'BUTTON') {
       const target = e.target.parentElement.parentElement.parentElement.parentElement
-      const index = Array.from(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName(className)).indexOf(target)
+      const index = Array.from(wholeThing.current.getElementsByClassName(className)).indexOf(target)
       return { index: index, whole: e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement }
 
     }
     if (e.target.tagName == 'INPUT') {
       const target = e.target.parentElement.parentElement.parentElement
-      const index = Array.from(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName(className)).indexOf(target)
+      const index = Array.from(wholeThing.current.getElementsByClassName(className)).indexOf(target)
       return { index: index, whole: e.target.parentElement.parentElement.parentElement.parentElement.parentElement }
 
     }
@@ -2331,7 +2354,7 @@ const CatProfileBasedSet = (props) => {
   if (categories.length > 0) {
     categorySection = categories.map((category) => {
       return <div className={'category'} key={categories.indexOf(category)}>
-        <TextField style={{ width: 200 }} className={'title'} defaultValue={category.title} onInput={setTitle} /><IconButton onClick={deleteRule} className={`delete ${categories.indexOf(category)}`} style={{ color: 'red', height: 35, width: 35, position: 'relative', top: 'calc(100% - 17.5px)' }} component="span"> <CloseIcon /> </IconButton>
+        <TextField className={"title"} value={category.title} onInput={setTitle} /><IconButton onClick={deleteRule} className={`delete ${categories.indexOf(category)}`} style={{ color: 'red', height: 35, width: 35, position: 'relative', top: 'calc(100% - 17.5px)' }} component="span"> <CloseIcon /> </IconButton>
         <footer style={{ padding: "10px 0" }}></footer>
         <Typography style={{ fontSize: 15, width: "100%", display: "block" }}>Words</Typography>
         <Autocomplete className={'inputWords'} multiple onChange={onWordsChange} value={Object.keys(category.words)} freeSolo options={[]} renderInput={(params) => <TextField {...params} placeholder={props.placehold} />} />
@@ -2355,7 +2378,7 @@ const CatProfileBasedSet = (props) => {
         </div>
         <div style={{ display: "none" , position: 'relative'}} className={'warnpoints'}>
           <footer style={{ padding: "10px 0" }}></footer>
-            <input onInput={onPointChange} defaultValue={category.points} style={{ height: 30, fontSize: 18, width: `calc(100% - 80px)` }} type="number" /><Typography style={{ width: 80, textAlign: "right", fontSize: 16, position: "absolute", right: 0, top: "calc(50% - 2px)" }}>Points</Typography>
+          <input onInput={onPointChange} defaultValue={category.points} style={{ height: 30, fontSize: 18, width: `calc(100% - 80px)` }} type="number" /><Typography style={{ width: 80, textAlign: "right", fontSize: 16, position: "absolute", right: 0, top: "26px" }}>Points</Typography>
         </div>
         </Grid>
         <Gap></Gap>
@@ -2576,7 +2599,7 @@ class ProfileTAAutomodSet extends React.Component {
     }
 
     this.setState({
-      availableOptions: available
+      availableOptions: punishmentSort(available)
     })
 
 

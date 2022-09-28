@@ -70,19 +70,24 @@ const Autopunish = (props) => {
     const getWhichPunishSelect = (e, data) => {
         const target = e.target
         const value = e.target.value
-        const index = Array.from(target.parentElement.parentElement.parentElement.getElementsByClassName('punishmentType')).indexOf(target)
+        const whole = target.parentElement.parentElement.parentElement
+        const index = Array.from(whole.getElementsByClassName('punishmentType')).indexOf(target)
         
+        const fors = Array.from(whole.getElementsByClassName('for'))
+        const betweens = Array.from(whole.getElementsByClassName('between'))
+        const timesels = Array.from(whole.getElementsByClassName('timesel'))
+        const timegrids = Array.from(whole.getElementsByClassName('timegrid'))
         
         if (value == 'mute' || value == 'tempban') {
-            forRefs.current[index].style.display = 'block'
-            timeRefs.current[index].style.display = 'block'
-            betweenRefs.current[index].style.display = 'block'
-            timeSelects.current[index].style.display = 'block'
+            fors[index].style.display = 'block'
+            betweens[index].style.display = 'block'
+            timesels[index].style.display = 'block'
+            timegrids[index].style.display = 'block'
         } else {
-            forRefs.current[index].style.display = 'none'
-            timeRefs.current[index].style.display = 'none'
-            betweenRefs.current[index].style.display = 'none'
-            timeSelects.current[index].style.display = 'none'
+            fors[index].style.display = 'none'
+            betweens[index].style.display = 'none'
+            timesels[index].style.display = 'none'
+            timegrids[index].style.display = 'none'
         }
         const punishRules = rules
         punishRules[index].type = value
@@ -177,10 +182,10 @@ const Autopunish = (props) => {
             <option value={"tempban"}>tempban</option> <option value={"ban"}>ban</option> 
         </select>
         </Grid>
-        <Grid ref={addToForRefs} item style={{paddingTop: 5, paddingBottom: 5, display: 'none'}}><Typography style={{paddingLeft: 5, paddingRight: 5, fontSize: 18}}>for</Typography></Grid>
-        <Grid ref={addToTimeRefs} item style={{paddingTop: 5, paddingBottom: 5, display: 'none'}}><input onInput={getWhichTime} className={'duration'} defaultValue={rule.duration} type='number' style={{width: 70, height: 27, fontSize: 16}}/></Grid>
-        <Grid ref={addToBetweenRefs} item style={{paddingTop: 5, paddingBottom: 5, display: 'none'}}><div style={{width: 5}} /></Grid>
-        <Grid ref={addToSelectRefs}  item style={{paddingTop: 5, paddingBottom: 5, display: 'none'}}>
+        <Grid ref={addToForRefs} item style={{paddingTop: 5, paddingBottom: 5, display: 'none'}} className={'for'}><Typography style={{paddingLeft: 5, paddingRight: 5, fontSize: 18}}>for</Typography></Grid>
+        <Grid ref={addToTimeRefs} item style={{paddingTop: 5, paddingBottom: 5, display: 'none'}} className={'timegrid'}><input onInput={getWhichTime} className={'duration'} defaultValue={rule.duration} type='number' style={{width: 70, height: 27, fontSize: 16}}/></Grid>
+        <Grid ref={addToBetweenRefs} item style={{paddingTop: 5, paddingBottom: 5, display: 'none'}} className={'between'}><div style={{width: 5}} /></Grid>
+        <Grid ref={addToSelectRefs}  item style={{paddingTop: 5, paddingBottom: 5, display: 'none'}} className={'timesel'}>
         <select className={'durationType'}onChange={getWhichDurationTypeSelect} defaultValue={rule.durationType}style={{width: 100, fontSize: 16,height: 27}}>
             <option value={"seconds"}>seconds</option>
             <option value={"minutes"}>minutes</option>
